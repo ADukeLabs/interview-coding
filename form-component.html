@@ -1,0 +1,81 @@
+    <form name="userForm">
+      <md-content class="md-padding" layout-xs="column" layout="row">
+  
+    <div flex-xs flex-gt-xs="50" layout="column">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">User Details</span>
+            <span class="md-subhead">{{$ctrl.firstName}} {{$ctrl.lastName}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <div layout="row">
+              <md-input-container flex>
+                <label>First name</label>
+                <input type="text" ng-model="$ctrl.firstName" required />
+              </md-input-container>
+              <md-input-container flex>
+                <label>Last name</label>
+                <input type="text" ng-model="$ctrl.lastName" required />
+              </md-input-container>
+            </div>
+
+            <div layout="row">       
+              <md-input-container flex>
+                <label>Date of birth</label>
+                <md-datepicker ng-model="$ctrl.dateOfBirth"></md-datepicker>
+              </md-input-container>
+
+               <md-input-container flex>
+                  <label>Country of birth</label>
+                  <md-select ng-model="$ctrl.documentType" required>
+                    <md-option ng-repeat="country in $ctrl.countries" ng-value="country">{{country}}</md-option>
+                  </md-select>
+              </md-input-container>
+            </div>
+
+            <div layout="row">
+               <md-input-container flex>
+                  <label>Document type</label>
+                  <md-select ng-model="$ctrl.documentType" required>
+                    <md-option value="1">Passport</md-option>
+                    <md-option value="2">Driving license</md-option>
+                    <md-option value="3">Borth cerificate</md-option>
+                  </md-select>
+              </md-input-container>
+
+              <md-input-container flex>
+                <label>Document number</label>
+                <input type="text" ng-model="$ctrl.documentNumber" />
+              </md-input-container>
+
+              <md-input-container flex>
+                <label>Document version</label>
+                <input type="text" ng-model="$ctrl.documentVersion" />
+              </md-input-container>
+
+              <md-input-container flex>
+                <label>Expiry date</label>
+                <input ng-model="$ctrl.expiryDate"></input>
+              </md-input-container>
+            </div>
+
+            <div layout="row">
+               <md-input-container flex>
+                  <label>Tax number</label>
+                  <input ng-model="$ctrl.taxNumber" required/>
+              </md-input-container>
+              <md-input-container flex>
+                <label>Tax year end</label>
+                <md-datepicker ng-model="$ctrl.taxYearEnd" required></md-datepicker>
+              </md-input-container>
+            </div>
+        </md-card-content>
+
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button class="md-primary md-raised">Save</md-button>
+        </md-card-actions>
+      </md-card>     
+</md-content>
+      </form>
