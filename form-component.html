@@ -1,4 +1,4 @@
-    <form name="userForm">
+    <form id="userForm" name="userForm">
       <md-content class="md-padding" layout-xs="column" layout="row">
   
     <div flex-xs flex-gt-xs="50" layout="column">
@@ -6,76 +6,115 @@
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">User Details</span>
-            <span class="md-subhead">{{$ctrl.firstName}} {{$ctrl.lastName}}</span>
+            <span class="md-subhead">{{$ctrl.firstName}} {{$ctrl.middleName}} {{$ctrl.lastName}}</span>
           </md-card-title-text>
         </md-card-title>
         <md-card-content>
             <div layout="row">
               <md-input-container flex>
                 <label>First name</label>
-                <input type="text" ng-model="$ctrl.firstName" required />
+                <input type="text" name="first" ng-model="$ctrl.firstName" required />
+                <ng-messages for="userForm.first$error">
+                <ng-message when="required">This field is required</ng-message>
               </md-input-container>
+
+              <md-input-container flex>
+                <label>Middle Name</label>
+                <input type="text" name="middle" ng-model="$ctrl.middleName" />
+              </md-input-container>
+              
               <md-input-container flex>
                 <label>Last name</label>
-                <input type="text" ng-model="$ctrl.lastName" required />
+                <input type="text" name="last" ng-model="$ctrl.lastName" required />
+                <ng-messages for="userForm.last$error">
+                <ng-message when="required">This field is required</ng-message>
               </md-input-container>
             </div>
 
             <div layout="row">       
-              <md-input-container flex>
+              <md-input-container>
                 <label>Date of birth</label>
-                <md-datepicker ng-model="$ctrl.dateOfBirth"></md-datepicker>
+                <md-datepicker name="dateOfBirth" ng-model="$ctrl.dateOfBirth" md-hide-icons="calendar" md-placeholder="mm/dd/yyyy"></md-datepicker>
               </md-input-container>
 
                <md-input-container flex>
                   <label>Country of birth</label>
-                  <md-select ng-model="$ctrl.documentType" required>
+                  <md-select ng-model="$ctrl.Country" name="country" required>
                     <md-option ng-repeat="country in $ctrl.countries" ng-value="country">{{country}}</md-option>
                   </md-select>
+                  <ng-messages for="userForm.country$error">
+                  <ng-message when="required">This field is required</ng-message>
               </md-input-container>
             </div>
 
-            <div layout="row">
-               <md-input-container flex>
+            <div layout="row" ng-switch="$ctrl.documentType">
+               <md-input-container>
                   <label>Document type</label>
-                  <md-select ng-model="$ctrl.documentType" required>
+                  <md-select name="documentType" ng-model="$ctrl.documentType" required>
+                    <ng-messages for="userForm.documentType$error">
+                    <ng-message when="required">This field is required</ng-message>  
                     <md-option value="1">Passport</md-option>
                     <md-option value="2">Driving license</md-option>
-                    <md-option value="3">Borth cerificate</md-option>
+                    <md-option value="3">Birth cerificate</md-option>
                   </md-select>
               </md-input-container>
 
-              <md-input-container flex>
-                <label>Document number</label>
-                <input type="text" ng-model="$ctrl.documentNumber" />
+              <md-input-container flex ng-switch-when="1">
+                <label>Passport number</label>
+                <input type="text" name="PassportNumber" ng-model="$ctrl.documentNumber.Passport" />
               </md-input-container>
 
-              <md-input-container flex>
-                <label>Document version</label>
-                <input type="text" ng-model="$ctrl.documentVersion" />
+              <md-input-container flex ng-switch-when="2">
+                <label>Licence number</label>
+                <input type="text" name="licenseNumber"ng-model="$ctrl.documentNumber.License" />
               </md-input-container>
 
-              <md-input-container flex>
+              <md-input-container flex ng-switch-when="2">
+                <label>License Version</label> 
+                <input type="text" name="licenseVersion"ng-model="$ctrl.documentVersion" />
+              </md-input-container>
+
+              <md-input-container flex ng-switch-when="1|2" ng-switch-when-separator="|">
                 <label>Expiry date</label>
-                <input ng-model="$ctrl.expiryDate"></input>
+                <!-- <input name="expiryDate" ng-model="$ctrl.expiryDate"></input> -->
+                <md-datepicker name="expiryDate" ng-model="$ctrl.expiryDate" md-hide-icons="calendar" md-placeholder="mm/dd/yyyy"></md-datepicker>
+              </md-input-container>
+
+              <md-input-container flex ng-switch-when="3">
+                <label>Certificate number</label>
+                <input type="text" name="certNumber"ng-model="$ctrl.documentNumber.Certificate" />
               </md-input-container>
             </div>
 
             <div layout="row">
                <md-input-container flex>
                   <label>Tax number</label>
-                  <input ng-model="$ctrl.taxNumber" required/>
-              </md-input-container>
+                  <input ng-model="$ctrl.taxNumber" name="taxNumber" placeholder="(#)##-###-###" ng-pattern="/\([0-9]\)([0-9][0-9]\-[0-9][0-9][0-9]\-[0-9][0-9][0-9])/" required/>
+                  <span ng-show="userForm.taxNumber.$error.pattern">Not a valid number!</span>
+                  <ng-messages for="userForm.taxNumber$error">
+                  <ng-message when="required">This field is required</ng-message>
+               </md-input-container>
+
               <md-input-container flex>
-                <label>Tax year end</label>
-                <md-datepicker ng-model="$ctrl.taxYearEnd" required></md-datepicker>
+                <label>Tax End Date</label>
+                <md-select ng-model="$ctrl.taxEndMonth" placeholder="Month" required>
+                  <md-option name="taxEndMonth" ng-repeat="month in $ctrl.months" ng-value="month">{{month}}</md-option>
+                </md-select>
+              </md-input-container>
+
+              <md-input-container flex>
+                  <md-select ng-model="$ctrl.taxEndDay" placeholder="Day" required>
+                    <md-option name="taxEndDay" ng-repeat="day in $ctrl.days" ng-value="day">{{day}}</md-option>
+                </md-select>                
               </md-input-container>
             </div>
+
         </md-card-content>
 
         <md-card-actions layout="row" layout-align="end center">
-          <md-button class="md-primary md-raised">Save</md-button>
+          <md-button class="md-primary md-raised" ng-disabled="userForm.$invalid" ng-click="$ctrl.saveToLocal()">Save</md-button>
         </md-card-actions>
+
       </md-card>     
 </md-content>
       </form>

@@ -1,0 +1,56 @@
+Adminis Coding Exercise Results
+By Alex Duke.
+
+
+The documentation in this file describes how the features in the coding exercise for Adminis. Included are descriptions of code used for each task, and process for problem solving.
+
+
+1. Add optional Middle Name field.
+	-Added new input container, element, and model for this field. Did not add  	        	"required" to make it optional.	
+
+2. Add validation messages for required fields - e.g. Please fill in this field.
+	-Added "ng-messages" directive for elements labeled "required", with condition for 		when an error occurs. "ng-message" on next line displays message.
+
+3. Improve layout of a form (make fields nicely alligned).
+	-I wanted to keep the layout of the form horizontal to allow for easy readability by 	the user. The layout was updated to account for empty space as features were changed: changing the taxEndDate to a datepicker created empty space between it and the tax number input, prompting them to be added into the same row. The empty space next to the document type was left for the dynamic elements fill it. 
+	
+
+4. Resolve issue with broken datepicker in angular 1.6 -https://github.com/angular/material/issues/10070.
+	-Looking at the Angular code in CodePen, a good guess as to the cause of the problem
+	is an absence of data inside the Date class, which creates $scope.myDate. To solve this problem I would look into the Date class and see where the methods are sourcing their data. A data source would be a GET to an API for calendar information, then parsed into the Date class's properties.
+
+5.  Add placeholder 'mm/dd/yyyy' for datepickers, but keep the label.
+	-Added md-placeholder into datepickers specifying 'mm/dd/yyyy'.
+
+6.  Hide calendar icon for datepickers.
+	-Used "md-hide-icons="calendar" to hide icon.
+
+7.  Add missing countries to Country Of Birth dropdown.
+	-Added new Country strings to FormComponent countries property.
+
+8.  Make document section dynamic ··* For Passport require Passport Number and Expiry Date ··* For birth certificate require Certificate Number ··* For driver license require Driver Lincense Number and Driver licnese Version and optional Expiry Date.
+	-Use of ng-switch directive. Placed "ng-switch" in div tag specifying use of 			DocumentType condition. Then placed "ng-switch when" to dynamicaly change DOM 		elements based on the corresponding value of the document type.
+
+9.  Add tax number format validation (#)##-###-###.
+	-Added placeholder displaying the required input pattern. Used regex expression 		inside ng-pattern to specify the input in the required pattern. "Ng-show" was used 		to display error message of invalidation, disappearing after user enters number as 		required. 
+
+10. Change tax end date to two dropdowns - month and day instead of datepicker.
+	-Changed from "datepicker" to "md-select" and "md-option" in the same shape as the 		Countries feature. Months and Days string array properties were added to 		formComponent.
+
+11. Make save button disabled when form is invalid state.
+	-Added "ng-disabled" directive for when the userForm is invalid. 
+
+12. Save user data to local storage when user clicked save.
+	-Created new function property, 'saveToLocal' inside FormComponent. Function declares	
+	variable names form, creating an array of form data from the DOM. Using a forloop,
+	the data is stored into local storage by key: 'name', and data value. 
+
+
+Process
+
+
+	First step was too read each task carefully. Then they were weighed in importance and difficulty and ranked accordingly from greatest to least: Highest importance or difficulty were done first. Functionality was done first, layout
+
+	Each task was solved individually by researching AngularJS documentation and StackOverFlow. After researching a small amount of experimentation was done inside the code, until the desired result was achieved. If a task was taking more time, I would move on to another feature and return to it later. This helped in problem solving as it enabled me to look at a problem freshly, after completing other essential tasks. If stuck on a feature, I would further research the problem, then ask for help as needed.
+
+	With each feature, it was important to take my time and not to rush through, making sure that end product was the highest quality possible.
