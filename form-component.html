@@ -55,8 +55,6 @@
                <md-input-container>
                   <label>Document type</label>
                   <md-select name="documentType" ng-model="$ctrl.documentType" required>
-                    <!-- <ng-messages for="userForm.documentType.$error">
-                    <ng-message when="required">This field is required</ng-message>  --> 
                     <md-option value="1">Passport</md-option>
                     <md-option value="2">Driving license</md-option>
                     <md-option value="3">Birth cerificate</md-option>
@@ -83,7 +81,6 @@
 
               <md-input-container flex ng-switch-when="1|2" ng-switch-when-separator="|">
                 <label>Expiry date</label>
-                <!-- <input name="expiryDate" ng-model="$ctrl.expiryDate"></input> -->
                 <md-datepicker name="expiryDate" ng-model="$ctrl.expiryDate" md-hide-icons="calendar" md-placeholder="mm/dd/yyyy"></md-datepicker>
               </md-input-container>
 
@@ -96,10 +93,12 @@
             <div layout="row">
                <md-input-container flex>
                   <label>Tax number</label>
-                  <input ng-model="$ctrl.taxNumber" name="taxNumber" placeholder="(#)##-###-###" ng-pattern="/\([0-9]\)([0-9][0-9]\-[0-9][0-9][0-9]\-[0-9][0-9][0-9])/" required/>
-                  <span ng-show="userForm.taxNumber.$error.pattern">Not a valid number!</span>
-                  <ng-messages for="userForm.taxNumber$error">
-                  <ng-message when="required">This field is required</ng-message>
+                  <input ng-model="$ctrl.taxNumber" name="taxNumber" placeholder="(#)##-###-###" ng-pattern="/\([0-9]\)([0-9][0-9]\-[0-9][0-9][0-9]\-[0-9][0-9][0-9])/" required md-minLength="12"/>
+
+                  <div ng-messages="userForm.taxNumber.$error" role="alert" multiple>
+                    <div ng-message="required">This field is required</div>
+                    <div ng-message="pattern">Invalid! Number must by in displayed format.</div>
+                  </div>
                </md-input-container>
 
               <md-input-container flex>
@@ -107,12 +106,18 @@
                 <md-select ng-model="$ctrl.taxEndMonth" placeholder="Month" required>
                   <md-option name="taxEndMonth" ng-repeat="month in $ctrl.months" ng-value="month">{{month}}</md-option>
                 </md-select>
+                <div ng-messages="userForm.taxEndMonth.$error" role="alert">
+                  <div ng-message="required">This field is required.</div>
+                </div>
               </md-input-container>
 
               <md-input-container flex>
                   <md-select ng-model="$ctrl.taxEndDay" placeholder="Day" required>
                     <md-option name="taxEndDay" ng-repeat="day in $ctrl.days" ng-value="day">{{day}}</md-option>
-                </md-select>                
+                </md-select>
+                <div ng-messages="userForm.taxEndDay.$error" role="alert">
+                  <div ng-message="required">This field is required.</div>
+                </div>                
               </md-input-container>
             </div>
 
