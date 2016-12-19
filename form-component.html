@@ -14,9 +14,11 @@
               <md-input-container flex>
                 <label>First name</label>
                 <input type="text" name="first" ng-model="$ctrl.firstName" required />
-                <ng-messages for="userForm.first$error">
-                <ng-message when="required">This field is required</ng-message>
+                <div ng-messages="userForm.first.$error" role="alert">
+                  <div ng-message="required">This field is required.</div>
+                </div>
               </md-input-container>
+
 
               <md-input-container flex>
                 <label>Middle Name</label>
@@ -26,8 +28,9 @@
               <md-input-container flex>
                 <label>Last name</label>
                 <input type="text" name="last" ng-model="$ctrl.lastName" required />
-                <ng-messages for="userForm.last$error">
-                <ng-message when="required">This field is required</ng-message>
+                <div ng-messages="userForm.last.$error" role="alert">
+                  <div ng-message="required">This field is required.</div>
+                </div>
               </md-input-container>
             </div>
 
@@ -42,8 +45,9 @@
                   <md-select ng-model="$ctrl.Country" name="country" required>
                     <md-option ng-repeat="country in $ctrl.countries" ng-value="country">{{country}}</md-option>
                   </md-select>
-                  <ng-messages for="userForm.country$error">
-                  <ng-message when="required">This field is required</ng-message>
+                  <div ng-messages="userForm.country.$error" role="alert">
+                    <div ng-message="required">This field is required.</div>
+                  </div>
               </md-input-container>
             </div>
 
@@ -51,12 +55,15 @@
                <md-input-container>
                   <label>Document type</label>
                   <md-select name="documentType" ng-model="$ctrl.documentType" required>
-                    <ng-messages for="userForm.documentType$error">
-                    <ng-message when="required">This field is required</ng-message>  
+                    <!-- <ng-messages for="userForm.documentType.$error">
+                    <ng-message when="required">This field is required</ng-message>  --> 
                     <md-option value="1">Passport</md-option>
                     <md-option value="2">Driving license</md-option>
                     <md-option value="3">Birth cerificate</md-option>
                   </md-select>
+                  <div ng-messages="userForm.documentType.$error" role="alert">
+                    <div ng-message="required">This field is required.</div>
+                  </div>
               </md-input-container>
 
               <md-input-container flex ng-switch-when="1">

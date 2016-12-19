@@ -54,7 +54,7 @@
 
 
     angular
-        .module('MyApp', ['ngMaterial'])
+        .module('MyApp', ['ngMaterial', 'ngMessages'])
         .component('formComponent', {
             controller: FormComponent,
             templateUrl: 'form-component.html'
