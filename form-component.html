@@ -102,9 +102,9 @@
                </md-input-container>
 
               <md-input-container flex>
-                <label>Tax End Date</label>
-                <md-select ng-model="$ctrl.taxEndMonth" placeholder="Month" required>
-                  <md-option name="taxEndMonth" ng-repeat="month in $ctrl.months" ng-value="month">{{month}}</md-option>
+                <label>Tax End Month</label>
+                <md-select ng-model="$ctrl.taxEndMonth" name="taxEndMonth" required>
+                  <md-option ng-repeat="month in $ctrl.months" ng-value="month">{{month}}</md-option>
                 </md-select>
                 <div ng-messages="userForm.taxEndMonth.$error" role="alert">
                   <div ng-message="required">This field is required.</div>
@@ -112,8 +112,9 @@
               </md-input-container>
 
               <md-input-container flex>
-                  <md-select ng-model="$ctrl.taxEndDay" placeholder="Day" required>
-                    <md-option name="taxEndDay" ng-repeat="day in $ctrl.days" ng-value="day">{{day}}</md-option>
+                  <label>Tax End Day</label>
+                  <md-select ng-model="$ctrl.taxEndDay" name="taxEndDay" required>
+                    <md-option ng-repeat="day in $ctrl.days" ng-value="day">{{day}}</md-option>
                 </md-select>
                 <div ng-messages="userForm.taxEndDay.$error" role="alert">
                   <div ng-message="required">This field is required.</div>
